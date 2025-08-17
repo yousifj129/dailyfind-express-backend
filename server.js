@@ -3,9 +3,13 @@ const mongoose = require ('mongoose')
 const logger = require('morgan')
 const dotenv = require("dotenv").config()
 const cors = require ('cors')
-const app = express()
 const ShoppingItemsRoute = require("./routes/shoppingItemsRoute")
 
+
+const app = express()
+app.use(cors())
+app.use(express.json())
+app.use(logger('dev'))  
 app.get("/",(req,res)=>{
     
 })
