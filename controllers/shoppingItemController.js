@@ -34,7 +34,7 @@ async function indexShoppingItem(req,res) {
 
 async function getShoppingItem(req,res) {
     try{
-        const foundShoppingItem = await ShoppingItem.findById(req.params.ShoppingItemId)
+        const foundShoppingItem = await ShoppingItem.findById(req.params.ShoppingItemId).populate(["owner", "reviews"])
         if(foundShoppingItem){
             res.status(200)
         }
