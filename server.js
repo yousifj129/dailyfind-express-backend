@@ -10,10 +10,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(logger('dev'))  
-app.get("/",(req,res)=>{
-    
-})
-
 app.use("/shoppingItems",ShoppingItemsRoute)
 
 app.listen( 3000, ()=>{
