@@ -7,5 +7,5 @@ router.get("/",ShoppingItemController.indexShoppingItem)
 router.get("/:ShoppingItemId",ShoppingItemController.getShoppingItem)
 router.put("/:ShoppingItemId",ShoppingItemController.updateShoppingItem)
 router.delete("/:ShoppingItemId",ShoppingItemController.deleteShoppingItem)
-
+router.post("/uploadImage", ShoppingItemController.uploadImage)
 module.exports=router

@@ -7,9 +7,12 @@ const ShoppingItemsRoute = require("./routes/shoppingItemsRoute")
 const authRoutes = require("./routes/authRoutes")
 
 const app = express()
+
 app.use(cors())
 app.use(express.json())
 app.use(logger('dev'))  
+app.use(express.static("./public"));
+
 app.use("/shoppingItems",ShoppingItemsRoute)
 app.use("/auth", authRoutes )
 app.listen( 3000, ()=>{
