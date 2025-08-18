@@ -1,8 +1,9 @@
 const ShoppingItem = require ("../models/ShoppingItem") 
-
+const decodeToken = require("../lib/decodeToken")
 async function createShoppingItem(req,res) {
     try{
-        const newShoppingItem = await ShoppingItem.create(req.body)
+        
+        const newShoppingItem = await ShoppingItem.create({...req.body, owner: decodeToken(req).id})
         if(newShoppingItem){
             res.status(200).json(newShoppingItem)
         }else{

@@ -1,7 +1,8 @@
 const router = require("express").Router()
 const ShoppingItemController = require ("../controllers/shoppingItemController")
+const secureRoute = require("../middleware/secureRoute")
 
-router.post("/",ShoppingItemController.createShoppingItem)
+router.post("/",secureRoute,ShoppingItemController.createShoppingItem)
 router.get("/",ShoppingItemController.indexShoppingItem)
 router.get("/:ShoppingItemId",ShoppingItemController.getShoppingItem)
 router.put("/:ShoppingItemId",ShoppingItemController.updateShoppingItem)
