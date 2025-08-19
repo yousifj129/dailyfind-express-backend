@@ -54,7 +54,7 @@ async function getShoppingItem(req, res) {
     try {
         const foundShoppingItem = await ShoppingItem.findById(req.params.ShoppingItemId).populate(["owner", "reviews"])
         if (foundShoppingItem) {
-            res.status(200)
+            res.status(200).json(foundShoppingItem)
         }
     } catch (error) {
         console.log(error)
