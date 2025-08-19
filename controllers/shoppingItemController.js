@@ -67,6 +67,17 @@ async function getShoppingItem(req, res) {
 
 async function updateShoppingItem(req, res) {
     try {
+        const user = decodeToken(req)
+        
+        const shoppingItem = await ShoppingItem.findById(req.params.ShoppingItemId).populate("owner")
+        if(!user){
+            res.sendStatus(400)
+            return
+        }
+        if(user.id != shoppingItem.owner){
+            res.sendStatus(400)
+            return
+        }
         const updatedShoppingItem = await ShoppingItem.findByIdAndDelete(req.params.ShoppingItemId, req.body, { new: true })
         if (updatedShoppingItem) {
             res.status(200).json(updatedShoppingItem)
@@ -84,6 +95,17 @@ async function updateShoppingItem(req, res) {
 
 async function deleteShoppingItem(req, res) {
     try {
+         const user = decodeToken(req)
+        
+        const shoppingItem = await ShoppingItem.findById(req.params.ShoppingItemId).populate("owner")
+        if(!user){
+            res.sendStatus(400)
+            return
+        }
+        if(user.id != shoppingItem.owner){
+            res.sendStatus(400)
+            return
+        }
         const deletedShoppingItem = await ShoppingItem.findByIdAndDelete(req.params.ShoppingItemId)
         if (deletedShoppingItem) {
             res.status(200).json(deletedShoppingItem)
