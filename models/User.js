@@ -18,6 +18,10 @@ const userSchema = new Schema({
     ShoppingCart:{
         type: [mongoose.Schema.Types.ObjectId],
         ref: "ShoppingItem"
+    },
+    balance:{
+        type:Number,
+        default: 0
     }
 })
 // helper method to compare passwords
