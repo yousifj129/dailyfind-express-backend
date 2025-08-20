@@ -96,14 +96,6 @@ async function deleteShoppingItem(req, res) {
          const user = decodeToken(req)
         
         const shoppingItem = await ShoppingItem.findById(req.params.ShoppingItemId).populate("owner")
-        if(!user){
-            res.sendStatus(400)
-            return
-        }
-        if(user.id != shoppingItem.owner._id){
-            res.sendStatus(400)
-            return
-        }
         const deletedShoppingItem = await ShoppingItem.findByIdAndDelete(req.params.ShoppingItemId)
         if (deletedShoppingItem) {
             res.status(200).json(deletedShoppingItem)
