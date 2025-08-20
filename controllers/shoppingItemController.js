@@ -93,6 +93,7 @@ async function updateShoppingItem(req, res) {
 
 }
 
+
 async function deleteShoppingItem(req, res) {
     try {
          const user = decodeToken(req)
@@ -170,11 +171,39 @@ async function uploadImage(req, res) {
 
 }
 
+
+async function addReview(req, res) {
+    try {
+        const user = decodeToken(req)
+        
+        const shoppingItem = await ShoppingItem.findById(req.params.ShoppingItemId).populate("owner")
+        if(!user){
+            res.sendStatus(400)
+            return
+        }
+        shoppingItem.reviews.push(req.body)
+        const updatedShoppingItem = await ShoppingItem.findByIdAndUpdate(req.params.ShoppingItemId, shoppingItem)
+        if (updatedShoppingItem) {
+            res.status(200).json(updatedShoppingItem)
+        } else {
+            res.sendStatus(204)
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            error: error.message
+        })
+    }
+
+}
+
+
 module.exports = {
     createShoppingItem,
     indexShoppingItem,
     getShoppingItem,
     updateShoppingItem,
     deleteShoppingItem,
-    uploadImage
+    uploadImage, 
+    addReview
 }
