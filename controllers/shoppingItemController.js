@@ -102,7 +102,7 @@ async function deleteShoppingItem(req, res) {
             res.sendStatus(400)
             return
         }
-        if(user.id != shoppingItem.owner){
+        if(user.id != shoppingItem.owner._id){
             res.sendStatus(400)
             return
         }
