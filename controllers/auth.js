@@ -66,6 +66,17 @@ exports.getUserInformation = async (req, res) => {
     res.sendStatus(500)
   }
 }
+exports.setUserInformation = async (req,res) =>{
+  try{
+    const userFound = await User.findByIdAndUpdate(req.params.userId, req.body)
+    userFound.password = undefined
+    res.status(200).json(userFound)
+  }
+  catch (err){
+    console.log(err)
+    res.sendStatus(500)
+  }
+}
 
 // negative values in req.body.money = subtracting money
 exports.addMoneyToUser = async (req,res)=>{
