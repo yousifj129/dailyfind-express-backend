@@ -54,3 +54,31 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: 'Server error' })
   }
 }
+
+exports.getUserInformation = async (req, res) => {
+  try{
+    const userFound = await User.findById(req.params.userId)
+    userFound.password = undefined
+    res.status(200).json(userFound)
+  }
+  catch (err){
+    console.log(err)
+    res.sendStatus(500)
+  }
+}
+
+// negative values in req.body.money = subtracting money
+exports.addMoneyToUser = async (req,res)=>{
+  try{
+    const userFound = await User.findById(req.params.userId)
+    const amount = req.body.money
+    userFound.balance = userFound.balance + amount
+
+    await User.findByIdAndUpdate(req.params.userId, userFound)
+    res.sendStatus(200)
+  }
+  catch(err){
+    console.log(err)
+    res.sendStatus(500)
+  }
+}
