@@ -57,7 +57,18 @@ exports.login = async (req, res) => {
 
 exports.getUserInformation = async (req, res) => {
   try{
-    const userFound = await User.findById(req.params.userId)
+    const userFound = await User.findById(req.params.userId).populate("ShoppingCart")
+    userFound.password = undefined
+    res.status(200).json(userFound)
+  }
+  catch (err){
+    console.log(err)
+    res.sendStatus(500)
+  }
+}
+exports.setUserInformation = async (req,res) =>{
+  try{
+    const userFound = await User.findByIdAndUpdate(req.params.userId, req.body)
     userFound.password = undefined
     res.status(200).json(userFound)
   }
