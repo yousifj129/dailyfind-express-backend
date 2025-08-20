@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
 
 exports.getUserInformation = async (req, res) => {
   try{
-    const userFound = await User.findById(req.params.userId)
+    const userFound = await User.findById(req.params.userId).populate("ShoppingCart")
     userFound.password = undefined
     res.status(200).json(userFound)
   }
