@@ -82,3 +82,30 @@ exports.addMoneyToUser = async (req,res)=>{
     res.sendStatus(500)
   }
 }
+
+exports.getShoppingCart = async (req,res)=>{
+  try{
+    const userFound = await User.findById(req.params.userId).populate("ShoppingCart")
+    
+
+    res.status(200).json(userFound.ShoppingCart)
+  }
+  catch(err){
+    console.log(err)
+    res.sendStatus(500)
+  }
+}
+
+exports.setShoppingCart = async (req,res)=>{
+  try{
+    const userFound = await User.findById(req.params.userId)
+
+    userFound.ShoppingCart = req.body.ShoppingCart
+
+    res.status(200).json(userFound.ShoppingCart)
+  }
+  catch(err){
+    res.sendStatus(500)
+
+  }
+}
