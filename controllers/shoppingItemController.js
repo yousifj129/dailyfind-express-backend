@@ -74,10 +74,7 @@ async function updateShoppingItem(req, res) {
             res.sendStatus(400)
             return
         }
-        if(user.id != shoppingItem.owner._id){
-            res.sendStatus(400)
-            return
-        }
+
         const updatedShoppingItem = await ShoppingItem.findByIdAndUpdate(req.params.ShoppingItemId, req.body, { new: true })
         if (updatedShoppingItem) {
             res.status(200).json(updatedShoppingItem)
