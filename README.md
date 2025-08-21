@@ -1,4 +1,4 @@
-# dailyfind-frontend
+# dailyfind-backend
 
 ## Introduction
 
